@@ -1,8 +1,8 @@
-#include "SList.h"
+﻿#include "SList.h"
 
 int main()
 {
-	SList<int> lst;
+	SList<int> lst; //тест гита на VS
 	lst.push_back(1);
 	lst.push_back(5);
 	lst.push_back(100);
