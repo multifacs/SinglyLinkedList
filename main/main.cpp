@@ -10,23 +10,28 @@ int main()
 	cout << "Size: " << lst.GetSize() << endl;
 	cout << lst << endl;
 	
-	cout << endl << "Deleting first" << endl;
+	cout << endl << "Popping front" << endl;
 	lst.pop_front();
 	cout << lst << endl;
 
-	cout << endl << "Inserting" << endl;
+	cout << endl << "Inserting 99 at 1, 2 at 1, 33 at 2" << endl;
 	lst.insert(99, 1);
 	lst.insert(2, 1);
 	lst.insert(33, 2);
 	cout << lst << endl;
 
-	cout << endl << "Removing" << endl;
+	cout << endl << "Removing element at [2]" << endl;
 	lst.remove(2);
 	cout << lst << endl;
 
-	cout << endl << "Pop back" << endl;
+	cout << endl << "Popping back" << endl;
 	lst.pop_back();
 	cout << lst << endl;
 
 	SList<int> lst2(lst);
+
+	SList<int> a;
+	a.push_back(123);
+
+	SList<int> b(a);
 }

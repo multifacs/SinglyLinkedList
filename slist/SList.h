@@ -38,7 +38,7 @@ public:
 	{
 		Size = 0;
 		head = nullptr;
-		for (int i = 0; i < Size; i++)
+		for (int i = 0; i < _l.Size; i++)
 			push_back(_l[i]);
 	}
 	~SList()
@@ -109,6 +109,8 @@ public:
 
 		if (index == 0)
 			push_front(data);
+		else if (index == Size)
+			push_back(data);
 		else
 		{
 			Node<T>* previous = find_prev(index);
@@ -127,6 +129,8 @@ public:
 
 		if (index == 0)
 			pop_front();
+		else if (index == Size - 1)
+			pop_back();
 		else
 		{
 			Node<T>* previous = find_prev(index);
@@ -144,7 +148,15 @@ public:
 		if (Size == 0)
 			throw logic_error("list empty");
 
-		remove(Size - 1);
+		//remove(Size - 1);
+
+		Node<T>* previous = find_prev(Size - 1);
+
+		Node<T>* temp = previous->pNext;
+		previous->pNext = nullptr;
+
+		delete temp;
+		Size--;
 	}
 
 	friend ostream& operator << (ostream& ostr, SList<T>& _l)
