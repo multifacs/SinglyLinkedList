@@ -2,7 +2,7 @@
 
 int main()
 {
-	SList<int> lst; //тест гита на VS
+	SList<int> lst;
 	lst.push_back(1);
 	lst.push_back(5);
 	lst.push_back(100);
@@ -20,6 +20,10 @@ int main()
 	lst.insert(33, 2);
 	cout << lst << endl;
 
+	cout << endl << "Reversing" << endl;
+	lst.reverse();
+	cout << lst << endl;
+
 	cout << endl << "Removing element at [2]" << endl;
 	lst.remove(2);
 	cout << lst << endl;
@@ -28,10 +32,30 @@ int main()
 	lst.pop_back();
 	cout << lst << endl;
 
-	SList<int> lst2(lst);
-
 	SList<int> a;
 	a.push_back(123);
-
 	SList<int> b(a);
+
+	cout << endl << "Reversing" << endl;
+	lst.reverse();
+	cout << lst << endl;
+
+	cout << endl << "Testing find and delete (1)" << endl;
+
+	b.push_back(1);
+	b.push_back(1);
+	b.push_back(2);
+	b.push_back(3);
+	b.push_back(1);
+	b.push_back(5);
+	b.push_front(1);
+
+	cout << b << endl;
+	b.find_and_delete(1);
+	cout << b << endl;
+
+	cout << endl << "Testing find max odd" << endl;
+	cout << b.find_max_odd()->data << endl;
+	b.push_back(125);
+	cout << b.find_max_odd()->data << endl;
 }

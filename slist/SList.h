@@ -168,4 +168,66 @@ public:
 
 		return ostr;
 	}
+
+	//extra tasks
+
+	void reverse()
+	{
+		Node<T>* previous = nullptr;
+		Node<T>* current = this->head;
+		Node<T>* next = this->head->pNext;
+
+		current->pNext = nullptr;
+		previous = current;
+		current = next;
+		next = next->pNext;
+
+		for (int i = 1; i < Size; i++)
+		{
+			current->pNext = previous;
+			previous = current;
+			current = next;
+			if (next != nullptr)
+				next = next->pNext;
+		}
+
+		head = previous;
+	}
+
+	void find_and_delete(T value)
+	{
+		Node<T>* current = head;
+		int counter = 0;
+
+		while (current != nullptr)
+		{
+			if (current->data == value)
+			{
+				current = current->pNext;
+				remove(counter);
+				continue;
+			}
+			current = current->pNext;
+			counter++;
+		}
+	}
+
+	Node<T>* find_max_odd()
+	{
+		Node<T>* current = head;
+		Node<T>* result = nullptr;
+		T temp = 0;
+
+		while (current != nullptr)
+		{
+			if ((current->data % 2 == 1) && (current->data > temp))
+			{
+				result = current;
+				temp = current->data;
+			}
+			current = current->pNext;
+		}
+
+		return result;
+	}
 };
