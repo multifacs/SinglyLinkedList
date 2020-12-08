@@ -173,6 +173,9 @@ public:
 
 	void reverse()
 	{
+		if (Size == 0)
+			throw logic_error("list empty");
+
 		Node<T>* previous = nullptr;
 		Node<T>* current = this->head;
 		Node<T>* next = this->head->pNext;
@@ -196,6 +199,9 @@ public:
 
 	void find_and_delete(T value)
 	{
+		if (Size == 0)
+			throw logic_error("list empty");
+
 		Node<T>* current = head;
 		int counter = 0;
 
@@ -214,6 +220,9 @@ public:
 
 	Node<T>* find_max_odd()
 	{
+		if (Size == 0)
+			throw logic_error("list empty");
+
 		Node<T>* current = head;
 		Node<T>* result = nullptr;
 		T temp = 0;
