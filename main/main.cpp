@@ -58,4 +58,10 @@ int main()
 	cout << b.find_max_odd()->data << endl;
 	b.push_back(125);
 	cout << b.find_max_odd()->data << endl;
+
+	//SListIterator<int> i;
+
+	SList<int>::Iterator i = b.begin();
+
+	cout << *i;
 }

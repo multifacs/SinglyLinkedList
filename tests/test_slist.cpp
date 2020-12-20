@@ -13,7 +13,8 @@ TEST(slist, can_copy)
 
 	SList<int> b(a);
 
-	EXPECT_EQ(123, b[0]);
+	SList<int>::Iterator k = b.begin();
+	EXPECT_EQ(123, *k);
 }
 
 TEST(slist, can_push_back)
@@ -23,7 +24,9 @@ TEST(slist, can_push_back)
 	lst.push_back(5);
 	lst.push_back(100);
 
-	EXPECT_EQ(100, lst[1]);
+	SList<int>::Iterator k = lst.begin();
+	k++;
+	EXPECT_EQ(100, *k);
 }
 
 TEST(slist, can_pop_back)
@@ -37,7 +40,9 @@ TEST(slist, can_pop_back)
 
 	lst.push_back(17);
 
-	EXPECT_EQ(17, lst[1]);
+	SList<int>::Iterator k = lst.begin();
+	k++;
+	EXPECT_EQ(17, *k);
 }
 
 TEST(slist, cant_pop_in_empty_list)
@@ -55,7 +60,8 @@ TEST(slist, can_push_front)
 
 	lst.push_front(17);
 
-	EXPECT_EQ(17, lst[0]);
+	SList<int>::Iterator k = lst.begin();
+	EXPECT_EQ(17, *k);
 }
 
 TEST(slist, can_pop_front)
@@ -67,7 +73,8 @@ TEST(slist, can_pop_front)
 
 	lst.pop_front();
 
-	EXPECT_EQ(100, lst[0]);
+	SList<int>::Iterator k = lst.begin();
+	EXPECT_EQ(100, *k);
 }
 
 TEST(slist, can_insert)
@@ -81,7 +88,9 @@ TEST(slist, can_insert)
 	lst.insert(2, 1);
 	lst.insert(33, 2);
 
-	EXPECT_EQ(99, lst[3]);
+	SList<int>::Iterator k = lst.begin();
+	k++; k++; k++;
+	EXPECT_EQ(99, *k);
 }
 
 TEST(slist, can_remove)
@@ -94,7 +103,9 @@ TEST(slist, can_remove)
 
 	lst.remove(1);
 
-	EXPECT_EQ(21, lst[1]);
+	SList<int>::Iterator k = lst.begin();
+	k++;
+	EXPECT_EQ(21, *k);
 }
 
 TEST(slist, can_insert_at_end)
@@ -105,7 +116,9 @@ TEST(slist, can_insert_at_end)
 
 	a.insert(3, a.GetSize());
 
-	EXPECT_EQ(3, a[a.GetSize() - 1]);
+	SList<int>::Iterator k = a.begin();
+	k++; k++;
+	EXPECT_EQ(3, *k);
 }
 
 TEST(slist, can_remove_at_end)
@@ -117,7 +130,9 @@ TEST(slist, can_remove_at_end)
 
 	a.remove(a.GetSize() - 1);
 
-	EXPECT_EQ(2, a[a.GetSize() - 1]);
+	SList<int>::Iterator k = a.begin();
+	k++;
+	EXPECT_EQ(2, *k);
 }
 
 TEST(slist, cant_insert_out_of_bounds)

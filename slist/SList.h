@@ -29,6 +29,41 @@ private:
 		return previous;
 	}
 public:
+	class Iterator
+	{
+	private:
+		Node<T>* node;
+	public:
+		Iterator(Node<T>* _n) : node(_n) {}
+		Iterator(Iterator& _v) : node(_v.node) {}
+
+		bool CanMove() { return (node != nullptr); }
+		void Move() { node = node->pNext; }
+
+		bool operator==(const Iterator& _v) { return node == _v.node; }
+		bool operator!=(const Iterator& _v) { return !((*this) == _v); }
+
+		Iterator operator++(int)
+		{
+			if (!CanMove())
+				throw logic_error("reached end");
+			Move();
+			return (*this);
+		}
+		Iterator& operator=(const Iterator& _v)
+		{
+			node = _v.node;
+			return (*this);
+		}
+
+		T& operator* () {
+			if (node != nullptr)
+				return node->data;
+			else
+				throw logic_error("empty pointer");
+		}
+	};
+
 	SList()
 	{
 		Size = 0;
@@ -38,31 +73,22 @@ public:
 	{
 		Size = 0;
 		head = nullptr;
-		for (int i = 0; i < _l.Size; i++)
-			push_back(_l[i]);
+		Iterator k = _l.begin();
+		while(k.CanMove())
+		{
+			push_back(*k);
+			k++;
+		}
 	}
 	~SList()
 	{
 		clear();
 	}
 
+	Iterator begin() { return Iterator(head); }
+	Iterator end() { return Iterator(nullptr); }
+
 	int GetSize() const { return Size; }
-
-	T& operator[](const int index)
-	{
-		if (index < 0 || index >= Size)
-			throw length_error("incorrect index");
-
-		int counter = 0;
-		Node<T>* current = this->head;
-		while (current != nullptr)
-		{
-			if (counter == index)
-				return current->data;
-			current = current->pNext;
-			counter++;
-		}
-	}
 
 	void push_back(T data)
 	{
@@ -148,8 +174,6 @@ public:
 		if (Size == 0)
 			throw logic_error("list empty");
 
-		//remove(Size - 1);
-
 		Node<T>* previous = find_prev(Size - 1);
 
 		Node<T>* temp = previous->pNext;
@@ -161,10 +185,14 @@ public:
 
 	friend ostream& operator << (ostream& ostr, SList<T>& _l)
 	{
+		Iterator k = _l.begin();
 		ostr << "{";
-			for (int i = 0; i < _l.GetSize() - 1; i++)
-				ostr << _l[i] << ", ";
-		ostr << _l[_l.GetSize() - 1] << "}";
+		for (int i = 0; i < _l.GetSize() - 1; i++)
+		{
+			ostr << *k << ", ";
+			k++;
+		}
+		ostr << *k << "}";
 
 		return ostr;
 	}
@@ -240,3 +268,4 @@ public:
 		return result;
 	}
 };
+
